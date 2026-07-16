@@ -234,16 +234,21 @@
       ).join('');
     }
 
+    // Direct download - no redirect guaranteed
     async function dlWall(url) {
-      try {
-        const r = await fetch(url);
-        const blob = await r.blob();
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'blaze-' + Date.now() + '.jpg';
-        document.body.appendChild(a); a.click(); document.body.removeChild(a);
-        setTimeout(() => URL.revokeObjectURL(a.href), 5000);
-      } catch { window.open(url, '_blank'); }
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = url;
+      await new Promise((res, rej) => { img.onload = res; img.onerror = rej; });
+      const c = document.createElement('canvas');
+      c.width = img.naturalWidth;
+      c.height = img.naturalHeight;
+      const ctx = c.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      const a = document.createElement('a');
+      a.href = c.toDataURL('image/jpeg', 0.92);
+      a.download = 'blaze-' + Date.now() + '.jpg';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
     }
 
     let curUrl = '';
