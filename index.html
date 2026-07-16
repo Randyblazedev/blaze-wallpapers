@@ -3,247 +3,308 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blaze Wallpapers — Beautiful Wallpapers</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Blaze Wallpapers — Unlimited HD Wallpapers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; }
-    body { font-family: 'Poppins', sans-serif; background: #0a0a0f; color: #fff; }
-    .navbar { background: rgba(10,10,15,.85) !important; backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,.05); }
-    .navbar-brand { font-weight: 800; font-size: 1.3rem; letter-spacing: -.5px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #07070d; color: #fff; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #07070d; }
+    ::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 3px; }
+
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 24px; display: flex; align-items: center; justify-content: space-between;
+      background: rgba(7,7,13,.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+    .nav .logo { font-size: 1.2rem; font-weight: 800; background: linear-gradient(135deg,#fff,#a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav a { color: #64748b; text-decoration: none; font-size: .8rem; font-weight: 500; transition: color .2s; }
+    .nav a:hover { color: #a855f7; }
+
     .hero {
-      padding: 80px 0 60px; text-align: center;
-      background: linear-gradient(180deg, #0a0a0f, #1a0a2e, #0a0a0f);
+      padding: 100px 20px 50px; text-align: center;
+      background: linear-gradient(180deg, #07070d 0%, #110a1a 50%, #07070d 100%);
     }
-    .hero h1 { font-size: 3.5rem; font-weight: 900; background: linear-gradient(135deg, #fff, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero p { color: #94a3b8; max-width: 500px; margin: 12px auto 24px; }
-    .search-box { max-width: 480px; margin: 0 auto; position: relative; }
-    .search-box input {
-      width: 100%; padding: 14px 20px 14px 48px; border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.05);
-      color: #fff; font-size: .95rem; outline: none; backdrop-filter: blur(10px);
-      transition: all .3s; font-family: 'Poppins', sans-serif;
+    .hero h1 { font-size: 3rem; font-weight: 900; background: linear-gradient(135deg,#fff,#c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.1; }
+    .hero p { color: #64748b; max-width: 440px; margin: 10px auto 24px; font-size: .95rem; }
+    .search { max-width: 440px; margin: 0 auto; position: relative; }
+    .search input {
+      width: 100%; padding: 13px 18px 13px 46px; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.06); background: rgba(255,255,255,.04);
+      color: #fff; font-size: .9rem; outline: none; font-family: 'Poppins', sans-serif;
+      transition: border-color .3s;
     }
-    .search-box input:focus { border-color: #a855f7; box-shadow: 0 0 20px rgba(168,85,247,.15); }
-    .search-box .icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 1.2rem; }
-    .cats { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
-    .cat-chip {
-      padding: 6px 18px; border-radius: 50px; font-size: .8rem; font-weight: 500;
-      border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03);
-      color: #94a3b8; cursor: pointer; transition: all .2s; text-transform: capitalize;
+    .search input:focus { border-color: #a855f7; }
+    .search .sicon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #475569; font-size: 1.1rem; }
+
+    .filters { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin: 18px auto 0; max-width: 600px; }
+    .chip {
+      padding: 5px 14px; border-radius: 50px; font-size: .75rem; font-weight: 500;
+      border: 1px solid rgba(255,255,255,.06); background: rgba(255,255,255,.03);
+      color: #64748b; cursor: pointer; transition: all .2s; text-transform: capitalize; user-select: none;
     }
-    .cat-chip:hover, .cat-chip.active { background: #a855f7; border-color: #a855f7; color: #fff; }
-    .gallery { padding: 40px 0; }
-    .grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px; max-width: 1200px; margin: 0 auto; padding: 0 16px;
+    .chip:hover { border-color: rgba(168,85,247,.3); color: #c084fc; }
+    .chip.on { background: #a855f7; border-color: #a855f7; color: #fff; }
+
+    .info { text-align: center; font-size: .75rem; color: #475569; margin-top: 12px; }
+    .info span { color: #a855f7; font-weight: 600; }
+
+    .gallery { padding: 30px 16px 20px; max-width: 1280px; margin: 0 auto; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+
+    .card {
+      position: relative; border-radius: 14px; overflow: hidden; cursor: pointer;
+      aspect-ratio: 9/16; background: #12121e; transition: all .3s;
+      border: 1px solid rgba(255,255,255,.04); group: true;
     }
-    .wall-card {
-      position: relative; border-radius: 16px; overflow: hidden; cursor: pointer;
-      aspect-ratio: 9/16; background: #1a1a2e; transition: all .3s;
-      border: 1px solid rgba(255,255,255,.05);
+    .card:hover { transform: translateY(-3px); border-color: rgba(168,85,247,.2); box-shadow: 0 12px 30px rgba(168,85,247,.12); }
+    .card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+    .card:hover img { transform: scale(1.06); }
+    .card .overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,.7) 0%, transparent 45%);
+      opacity: 0; transition: opacity .25s; display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 14px;
     }
-    .wall-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(168,85,247,.2); border-color: rgba(168,85,247,.3); }
-    .wall-card img { width: 100%; height: 100%; object-fit: cover; transition: all .4s; }
-    .wall-card:hover img { transform: scale(1.05); }
-    .wall-card .overlay {
-      position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,.7) 0%, transparent 50%);
-      opacity: 0; transition: all .3s; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px;
+    .card:hover .overlay { opacity: 1; }
+    .card .tag { font-size: .65rem; color: #c084fc; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; }
+    .card .dl {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 6px;
+      background: rgba(168,85,247,.9); color: #fff; border: none; border-radius: 8px;
+      padding: 7px 14px; font-size: .75rem; font-weight: 600; cursor: pointer;
+      backdrop-filter: blur(8px); transition: all .2s; width: fit-content;
     }
-    .wall-card:hover .overlay { opacity: 1; }
-    .wall-card .overlay .tag { font-size: .7rem; color: #a855f7; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
-    .wall-card .overlay .dl-btn {
-      background: rgba(168,85,247,.9); color: #fff; border: none; border-radius: 10px;
-      padding: 8px 16px; font-size: .8rem; font-weight: 600; cursor: pointer;
-      backdrop-filter: blur(10px); transition: all .2s; margin-top: 8px; width: fit-content;
+    .card .dl:hover { background: #a855f7; transform: scale(1.05); }
+
+    .load-wrap { text-align: center; padding: 30px 0 40px; }
+    .load-wrap button {
+      background: rgba(168,85,247,.1); border: 1px solid rgba(168,85,247,.25); color: #c084fc;
+      padding: 11px 36px; border-radius: 50px; font-weight: 600; font-size: .85rem;
+      cursor: pointer; transition: all .2s; font-family: 'Poppins', sans-serif;
     }
-    .wall-card .overlay .dl-btn:hover { background: #a855f7; transform: scale(1.05); }
-    .load-more { text-align: center; padding: 40px; }
-    .load-more button {
-      background: rgba(168,85,247,.1); border: 1px solid rgba(168,85,247,.3); color: #a855f7;
-      padding: 12px 40px; border-radius: 50px; font-weight: 600; cursor: pointer;
-      transition: all .2s; font-size: .9rem;
+    .load-wrap button:hover { background: rgba(168,85,247,.2); transform: translateY(-2px); }
+
+    .full {
+      position: fixed; inset: 0; background: rgba(0,0,0,.93); z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .3s; padding: 20px;
     }
-    .load-more button:hover { background: rgba(168,85,247,.2); }
-    footer { text-align: center; padding: 24px; color: #64748b; font-size: .8rem; border-top: 1px solid rgba(255,255,255,.05); }
-    footer a { color: #a855f7; text-decoration: none; }
-    .fullscreen {
-      position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 9999;
-      display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none;
-      transition: opacity .3s; padding: 24px;
+    .full.on { opacity: 1; pointer-events: auto; }
+    .full img { max-width: 100%; max-height: 88vh; border-radius: 10px; object-fit: contain; }
+    .full .x {
+      position: absolute; top: 18px; right: 20px; color: #fff; font-size: 1.6rem;
+      cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center;
+      justify-content: center; border-radius: 50%; background: rgba(255,255,255,.08);
+      border: none; transition: background .2s;
     }
-    .fullscreen.open { opacity: 1; pointer-events: auto; }
-    .fullscreen img { max-width: 100%; max-height: 90vh; border-radius: 12px; object-fit: contain; }
-    .fullscreen .close {
-      position: absolute; top: 20px; right: 24px; color: #fff; font-size: 2rem;
-      cursor: pointer; width: 44px; height: 44px; display: flex; align-items: center;
-      justify-content: center; border-radius: 50%; background: rgba(255,255,255,.1);
-      transition: all .2s; border: none;
-    }
-    .fullscreen .close:hover { background: rgba(255,255,255,.2); }
-    .fullscreen .dl-full {
-      position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    .full .x:hover { background: rgba(255,255,255,.15); }
+    .full .d {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
       background: #a855f7; color: #fff; border: none; border-radius: 50px;
-      padding: 12px 36px; font-weight: 600; cursor: pointer; font-size: .9rem;
-      transition: all .2s;
+      padding: 11px 32px; font-weight: 600; font-size: .85rem; cursor: pointer;
+      transition: all .2s; font-family: 'Poppins', sans-serif; display: flex; align-items: center; gap: 8px;
     }
-    .fullscreen .dl-full:hover { background: #9333ea; transform: translateX(-50%) scale(1.05); }
+    .full .d:hover { background: #9333ea; transform: translateX(-50%) translateY(-2px); }
+
+    footer { text-align: center; padding: 20px; color: #475569; font-size: .75rem; border-top: 1px solid rgba(255,255,255,.04); }
+    footer a { color: #a855f7; text-decoration: none; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner { width: 20px; height: 20px; border: 2px solid rgba(168,85,247,.2); border-top-color: #a855f7; border-radius: 50%; animation: spin .6s linear infinite; display: inline-block; }
+
     @media (max-width: 640px) {
-      .hero h1 { font-size: 2.2rem; }
+      .hero h1 { font-size: 2rem; }
       .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand navbar-dark px-4">
-    <a class="navbar-brand" href="#">🔥 Blaze Wallpapers</a>
-    <div class="navbar-nav ms-auto">
-      <a class="nav-link active" href="#">Home</a>
-      <a class="nav-link" href="https://github.com/Randyblazedev/blaze-wallpapers" target="_blank">GitHub</a>
-    </div>
+
+  <nav class="nav">
+    <span class="logo">🔥 Blaze Wallpapers</span>
+    <a href="https://github.com/Randyblazedev" target="_blank">RandyBlazedev</a>
   </nav>
 
   <section class="hero">
     <h1>🔥 Blaze Wallpapers</h1>
-    <p>Beautiful, high-quality wallpapers for your phone and desktop</p>
-    <div class="search-box">
-      <span class="icon">🔍</span>
-      <input type="text" id="searchInput" placeholder="Search wallpapers..." oninput="filterWallpapers()">
+    <p>Unlimited HD wallpapers — download directly, no redirects</p>
+    <div class="search">
+      <span class="sicon">🔍</span>
+      <input type="text" id="s" placeholder="Search wallpapers..." oninput="doSearch()">
     </div>
-    <div class="cats" id="catChips"></div>
+    <div class="filters" id="chips"></div>
+    <div class="info"><span id="totalCount">0</span> wallpapers loaded · click any to preview & download</div>
   </section>
 
   <section class="gallery">
-    <div class="grid" id="wallGrid"></div>
-    <div class="load-more" id="loadMoreWrap">
-      <button onclick="loadMore()">Load More 🔥</button>
-    </div>
+    <div class="grid" id="grid"></div>
+    <div class="load-wrap" id="lm"><button onclick="loadWalls()">Load More 🔥</button></div>
   </section>
 
   <footer>
     <p>&copy; 2026 Blaze Wallpapers — Built by <a href="https://github.com/Randyblazedev" target="_blank">RandyBlazedev</a></p>
   </footer>
 
-  <div class="fullscreen" id="fullscreen" onclick="if(event.target===this)closeFull()">
-    <button class="close" onclick="closeFull()">✕</button>
-    <img id="fsImg" src="" alt="">
-    <button class="dl-full" id="fsDlBtn">⬇ Download</button>
+  <div class="full" id="full" onclick="if(event.target===this)closeF()">
+    <button class="x" onclick="closeF()">✕</button>
+    <img id="fi" src="" alt="">
+    <button class="d" id="fd">⬇ Download</button>
   </div>
 
   <script>
-    // Free wallpaper collection from picsum.photos (free, no API key needed)
-    const CATEGORIES = ['abstract', 'nature', 'city', 'space', 'tech', 'dark', 'gradient', 'minimal', 'neon', 'ocean'];
+    const CATS = ['all', 'abstract', 'nature', 'city', 'space', 'tech', 'dark', 'gradient', 'minimal', 'neon', 'ocean', 'animals', 'architecture', 'food', 'music', 'travel'];
     
-    // Generate wallpaper objects with picsum.photos (free stock photos)
-    const WALLS = [];
-    for (let i = 0; i < 60; i++) {
-      const w = 400 + Math.floor(Math.random() * 200);
-      const h = 700 + Math.floor(Math.random() * 300);
-      const cat = CATEGORIES[i % CATEGORIES.length];
-      WALLS.push({
-        id: 'wall-' + i,
-        url: `https://picsum.photos/seed/wall${i}/${w}/${h}`,
-        thumb: `https://picsum.photos/seed/wall${i}/400/700`,
-        category: cat,
-        title: cat.charAt(0).toUpperCase() + cat.slice(1) + ' ' + (i + 1)
+    let ALL = [];
+    let page = 1;
+    let loading = false;
+    let activeCat = 'all';
+    let query = '';
+    let loadedCount = 0;
+    const PER_PAGE = 30;
+
+    // Fetch from picsum API
+    async function fetchPage(p) {
+      try {
+        const r = await fetch(`https://picsum.photos/v2/list?page=${p}&limit=${PER_PAGE}`);
+        if (!r.ok) return [];
+        return await r.json();
+      } catch { return []; }
+    }
+
+    // Assign a category to each image
+    function assignCat(i) {
+      return CATS[1 + (i % (CATS.length - 1))];
+    }
+
+    async function loadWalls(append = true) {
+      if (loading) return;
+      loading = true;
+      const btn = document.querySelector('#lm button');
+      if (btn) btn.innerHTML = '<span class="spinner"></span> loading...';
+
+      const items = await fetchPage(page);
+      if (items.length === 0) {
+        if (btn) btn.textContent = 'No more 🎉';
+        loading = false;
+        return;
+      }
+
+      const mapped = items.map((item, i) => ({
+        id: item.id,
+        url: `https://picsum.photos/id/${item.id}/1080/1920`,
+        thumb: `https://picsum.photos/id/${item.id}/400/700`,
+        author: item.author,
+        category: assignCat(loadedCount + i),
+        title: `${assignCat(loadedCount + i)} ${item.id}`
+      }));
+
+      ALL = append ? [...ALL, ...mapped] : mapped;
+      loadedCount = ALL.length;
+      page++;
+
+      document.getElementById('totalCount').textContent = loadedCount;
+      render();
+      loading = false;
+      if (btn) btn.textContent = 'Load More 🔥';
+    }
+
+    function getFiltered() {
+      return ALL.filter(w => {
+        const c = activeCat === 'all' || w.category === activeCat;
+        const s = !query || w.category.includes(query) || String(w.id).includes(query);
+        return c && s;
       });
     }
 
-    let displayCount = 12;
-    let activeCat = 'all';
-    let searchQ = '';
+    function render() {
+      const grid = document.getElementById('grid');
+      const filtered = getFiltered();
 
-    function getCats() {
-      const all = ['all', ...new Set(WALLS.map(w => w.category))];
-      return all;
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:50px 20px;color:#475569;font-size:.9rem">No wallpapers found</div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(w => `
+        <div class="card" onclick="preview('${w.url}')">
+          <img src="${w.thumb}" alt="" loading="lazy">
+          <div class="overlay">
+            <span class="tag">${w.category}</span>
+            <button class="dl" onclick="event.stopPropagation();dl('${w.url}')">⬇ Download</button>
+          </div>
+        </div>
+      `).join('');
     }
 
-    function renderCats() {
-      const el = document.getElementById('catChips');
-      el.innerHTML = getCats().map(c => 
-        `<span class="cat-chip ${c === activeCat ? 'active' : ''}" onclick="setCat('${c}')">${c}</span>`
-      ).join('');
+    function doSearch() {
+      query = document.getElementById('s').value.toLowerCase();
+      render();
     }
 
     function setCat(c) {
       activeCat = c;
-      displayCount = 12;
-      renderCats();
-      renderGrid();
+      document.querySelectorAll('.chip').forEach(el => el.classList.toggle('on', el.dataset.cat === c));
+      render();
     }
 
-    function filterWallpapers() {
-      searchQ = document.getElementById('searchInput').value.toLowerCase();
-      displayCount = 12;
-      renderGrid();
+    function renderCats() {
+      const el = document.getElementById('chips');
+      el.innerHTML = CATS.map(c => 
+        `<span class="chip ${c === 'all' ? 'on' : ''}" data-cat="${c}" onclick="setCat('${c}')">${c}</span>`
+      ).join('');
     }
 
-    function getFiltered() {
-      return WALLS.filter(w => {
-        const matchCat = activeCat === 'all' || w.category === activeCat;
-        const matchSearch = !searchQ || w.title.toLowerCase().includes(searchQ) || w.category.includes(searchQ);
-        return matchCat && matchSearch;
-      });
-    }
-
-    function renderGrid() {
-      const grid = document.getElementById('wallGrid');
-      const filtered = getFiltered();
-      const shown = filtered.slice(0, displayCount);
-
-      if (shown.length === 0) {
-        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#64748b">No wallpapers found 😕</div>';
-        document.getElementById('loadMoreWrap').style.display = 'none';
-        return;
+    // Direct download - no redirect
+    async function dl(url) {
+      try {
+        const r = await fetch(url);
+        const blob = await r.blob();
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'blaze-wallpaper-' + Date.now() + '.jpg';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+      } catch {
+        window.open(url, '_blank');
       }
-
-      grid.innerHTML = shown.map(w => `
-        <div class="wall-card" onclick="openFull('${w.url}')">
-          <img src="${w.thumb}" alt="${w.title}" loading="lazy">
-          <div class="overlay">
-            <span class="tag">${w.category}</span>
-            <button class="dl-btn" onclick="event.stopPropagation();downloadWall('${w.url}')">⬇ Download</button>
-          </div>
-        </div>
-      `).join('');
-
-      document.getElementById('loadMoreWrap').style.display = displayCount >= filtered.length ? 'none' : 'block';
     }
 
-    function loadMore() {
-      displayCount += 12;
-      renderGrid();
-    }
+    let curUrl = '';
 
-    let currentFullUrl = '';
-
-    function openFull(url) {
-      currentFullUrl = url;
-      document.getElementById('fsImg').src = url;
-      document.getElementById('fsDlBtn').onclick = () => downloadWall(url);
-      document.getElementById('fullscreen').classList.add('open');
+    function preview(url) {
+      curUrl = url;
+      document.getElementById('fi').src = url;
+      document.getElementById('fd').onclick = () => dl(url);
+      document.getElementById('full').classList.add('on');
       document.body.style.overflow = 'hidden';
     }
 
-    function closeFull() {
-      document.getElementById('fullscreen').classList.remove('open');
+    function closeF() {
+      document.getElementById('full').classList.remove('on');
       document.body.style.overflow = '';
     }
 
-    function downloadWall(url) {
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'blaze-wallpaper-' + Date.now() + '.jpg';
-      a.target = '_blank';
-      a.click();
-    }
-
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeFull();
+      if (e.key === 'Escape') closeF();
     });
 
+    // Init
     renderCats();
-    renderGrid();
+    loadWalls(false);
+
+    // Infinite scroll
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 800;
+        if (nearBottom) loadWalls();
+        ticking = false;
+      });
+    }, { passive: true });
   </script>
 </body>
 </html>
