@@ -3,308 +3,272 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blaze Wallpapers — Unlimited HD Wallpapers</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Blaze Wallpapers — Unlimited HD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Poppins', sans-serif; background: #07070d; color: #fff; }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #07070d; }
-    ::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 3px; }
+    body { font-family: 'Inter', sans-serif; background: #080810; color: #fff; min-height: 100vh; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #080810; }
+    ::-webkit-scrollbar-thumb { background: #7c3aed; border-radius: 3px; }
 
     .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 16px 24px; display: flex; align-items: center; justify-content: space-between;
-      background: rgba(7,7,13,.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,.04);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(8,8,16,.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,.04);
     }
-    .nav .logo { font-size: 1.2rem; font-weight: 800; background: linear-gradient(135deg,#fff,#a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .nav a { color: #64748b; text-decoration: none; font-size: .8rem; font-weight: 500; transition: color .2s; }
-    .nav a:hover { color: #a855f7; }
+    .logo { font-size: 1.05rem; font-weight: 800; background: linear-gradient(135deg,#fff,#a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -.3px; }
+    .nav a { color: #52525b; text-decoration: none; font-size: .75rem; font-weight: 500; transition: color .2s; }
+    .nav a:hover { color: #a78bfa; }
 
-    .hero {
-      padding: 100px 20px 50px; text-align: center;
-      background: linear-gradient(180deg, #07070d 0%, #110a1a 50%, #07070d 100%);
+    .hero { padding: 90px 20px 36px; text-align: center; background: linear-gradient(180deg,#080810,#100b20,#080810); }
+    .hero h1 { font-size: 2.8rem; font-weight: 900; background: linear-gradient(135deg,#fff,#a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -1px; line-height: 1.1; }
+    .hero p { color: #52525b; font-size: .9rem; margin: 8px auto 18px; }
+    .search-wrap { max-width: 380px; margin: 0 auto; position: relative; }
+    .search-wrap input {
+      width: 100%; padding: 11px 16px 11px 40px; border-radius: 12px; font-size: .85rem;
+      border: 1px solid rgba(255,255,255,.06); background: rgba(255,255,255,.04); color: #fff;
+      outline: none; font-family: 'Inter', sans-serif; transition: border-color .25s;
     }
-    .hero h1 { font-size: 3rem; font-weight: 900; background: linear-gradient(135deg,#fff,#c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.1; }
-    .hero p { color: #64748b; max-width: 440px; margin: 10px auto 24px; font-size: .95rem; }
-    .search { max-width: 440px; margin: 0 auto; position: relative; }
-    .search input {
-      width: 100%; padding: 13px 18px 13px 46px; border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.06); background: rgba(255,255,255,.04);
-      color: #fff; font-size: .9rem; outline: none; font-family: 'Poppins', sans-serif;
-      transition: border-color .3s;
-    }
-    .search input:focus { border-color: #a855f7; }
-    .search .sicon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #475569; font-size: 1.1rem; }
-
-    .filters { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin: 18px auto 0; max-width: 600px; }
+    .search-wrap input:focus { border-color: #7c3aed; }
+    .search-wrap .si { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: #3f3f46; font-size: 1rem; }
+    .chips { display: flex; gap: 5px; justify-content: center; flex-wrap: wrap; margin: 14px auto 0; max-width: 520px; }
     .chip {
-      padding: 5px 14px; border-radius: 50px; font-size: .75rem; font-weight: 500;
-      border: 1px solid rgba(255,255,255,.06); background: rgba(255,255,255,.03);
-      color: #64748b; cursor: pointer; transition: all .2s; text-transform: capitalize; user-select: none;
+      padding: 4px 12px; border-radius: 50px; font-size: .7rem; font-weight: 500;
+      border: 1px solid rgba(255,255,255,.05); background: rgba(255,255,255,.03);
+      color: #52525b; cursor: pointer; transition: all .2s; user-select: none;
     }
-    .chip:hover { border-color: rgba(168,85,247,.3); color: #c084fc; }
-    .chip.on { background: #a855f7; border-color: #a855f7; color: #fff; }
+    .chip:hover { border-color: rgba(124,58,237,.3); color: #a78bfa; }
+    .chip.on { background: #7c3aed; border-color: #7c3aed; color: #fff; }
+    .info { text-align: center; font-size: .7rem; color: #3f3f46; margin-top: 10px; }
+    .info b { color: #a78bfa; font-weight: 600; }
 
-    .info { text-align: center; font-size: .75rem; color: #475569; margin-top: 12px; }
-    .info span { color: #a855f7; font-weight: 600; }
+    .gallery { max-width: 1200px; margin: 0 auto; padding: 20px 12px 10px; }
+    .masonry { column-count: 4; column-gap: 10px; }
+    .masonry .item {
+      break-inside: avoid; margin-bottom: 10px; position: relative;
+      border-radius: 10px; overflow: hidden; cursor: pointer;
+      background: #12121e; transition: all .25s; border: 1px solid rgba(255,255,255,.03);
+    }
+    .masonry .item:hover { transform: translateY(-2px); border-color: rgba(124,58,237,.2); box-shadow: 0 8px 24px rgba(124,58,237,.1); }
+    .masonry .item img { width: 100%; height: auto; display: block; transition: transform .4s; }
+    .masonry .item:hover img { transform: scale(1.03); }
+    .masonry .item .ov {
+      position: absolute; inset: 0; background: linear-gradient(0deg,rgba(0,0,0,.65) 0%,transparent 40%);
+      opacity: 0; transition: opacity .2s; display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 10px;
+    }
+    .masonry .item:hover .ov { opacity: 1; }
+    .masonry .item .cat { font-size: .6rem; color: #a78bfa; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; }
+    .masonry .item .dl-btn {
+      margin-top: 4px; background: rgba(124,58,237,.9); color: #fff; border: none;
+      border-radius: 6px; padding: 5px 10px; font-size: .65rem; font-weight: 600;
+      cursor: pointer; transition: all .2s; width: fit-content;
+    }
+    .masonry .item .dl-btn:hover { background: #7c3aed; }
 
-    .gallery { padding: 30px 16px 20px; max-width: 1280px; margin: 0 auto; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
-
-    .card {
-      position: relative; border-radius: 14px; overflow: hidden; cursor: pointer;
-      aspect-ratio: 9/16; background: #12121e; transition: all .3s;
-      border: 1px solid rgba(255,255,255,.04); group: true;
+    .load-more { text-align: center; padding: 24px 0 32px; }
+    .load-more button {
+      background: rgba(124,58,237,.12); border: 1px solid rgba(124,58,237,.25); color: #a78bfa;
+      padding: 10px 32px; border-radius: 50px; font-weight: 600; font-size: .8rem;
+      cursor: pointer; transition: all .2s; font-family: 'Inter', sans-serif;
     }
-    .card:hover { transform: translateY(-3px); border-color: rgba(168,85,247,.2); box-shadow: 0 12px 30px rgba(168,85,247,.12); }
-    .card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
-    .card:hover img { transform: scale(1.06); }
-    .card .overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(0deg, rgba(0,0,0,.7) 0%, transparent 45%);
-      opacity: 0; transition: opacity .25s; display: flex; flex-direction: column;
-      justify-content: flex-end; padding: 14px;
-    }
-    .card:hover .overlay { opacity: 1; }
-    .card .tag { font-size: .65rem; color: #c084fc; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; }
-    .card .dl {
-      display: inline-flex; align-items: center; gap: 6px; margin-top: 6px;
-      background: rgba(168,85,247,.9); color: #fff; border: none; border-radius: 8px;
-      padding: 7px 14px; font-size: .75rem; font-weight: 600; cursor: pointer;
-      backdrop-filter: blur(8px); transition: all .2s; width: fit-content;
-    }
-    .card .dl:hover { background: #a855f7; transform: scale(1.05); }
-
-    .load-wrap { text-align: center; padding: 30px 0 40px; }
-    .load-wrap button {
-      background: rgba(168,85,247,.1); border: 1px solid rgba(168,85,247,.25); color: #c084fc;
-      padding: 11px 36px; border-radius: 50px; font-weight: 600; font-size: .85rem;
-      cursor: pointer; transition: all .2s; font-family: 'Poppins', sans-serif;
-    }
-    .load-wrap button:hover { background: rgba(168,85,247,.2); transform: translateY(-2px); }
+    .load-more button:hover { background: rgba(124,58,237,.2); transform: translateY(-1px); }
 
     .full {
-      position: fixed; inset: 0; background: rgba(0,0,0,.93); z-index: 9999;
+      position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 9999;
       display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none; transition: opacity .3s; padding: 20px;
+      opacity: 0; pointer-events: none; transition: opacity .25s; padding: 16px;
     }
     .full.on { opacity: 1; pointer-events: auto; }
-    .full img { max-width: 100%; max-height: 88vh; border-radius: 10px; object-fit: contain; }
-    .full .x {
-      position: absolute; top: 18px; right: 20px; color: #fff; font-size: 1.6rem;
-      cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center;
+    .full img { max-width: 100%; max-height: 88vh; border-radius: 8px; object-fit: contain; }
+    .full .close {
+      position: absolute; top: 16px; right: 18px; color: #fff; font-size: 1.4rem;
+      cursor: pointer; width: 36px; height: 36px; display: flex; align-items: center;
       justify-content: center; border-radius: 50%; background: rgba(255,255,255,.08);
       border: none; transition: background .2s;
     }
-    .full .x:hover { background: rgba(255,255,255,.15); }
-    .full .d {
-      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
-      background: #a855f7; color: #fff; border: none; border-radius: 50px;
-      padding: 11px 32px; font-weight: 600; font-size: .85rem; cursor: pointer;
-      transition: all .2s; font-family: 'Poppins', sans-serif; display: flex; align-items: center; gap: 8px;
+    .full .close:hover { background: rgba(255,255,255,.15); }
+    .full .down {
+      position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: #7c3aed; color: #fff; border: none; border-radius: 50px;
+      padding: 10px 28px; font-weight: 600; font-size: .8rem; cursor: pointer;
+      transition: all .2s; font-family: 'Inter', sans-serif;
     }
-    .full .d:hover { background: #9333ea; transform: translateX(-50%) translateY(-2px); }
+    .full .down:hover { background: #6d28d9; transform: translateX(-50%) translateY(-1px); }
 
-    footer { text-align: center; padding: 20px; color: #475569; font-size: .75rem; border-top: 1px solid rgba(255,255,255,.04); }
-    footer a { color: #a855f7; text-decoration: none; }
+    footer { text-align: center; padding: 18px; color: #3f3f46; font-size: .7rem; border-top: 1px solid rgba(255,255,255,.03); }
+    footer a { color: #a78bfa; text-decoration: none; font-weight: 500; }
 
     @keyframes spin { to { transform: rotate(360deg); } }
-    .spinner { width: 20px; height: 20px; border: 2px solid rgba(168,85,247,.2); border-top-color: #a855f7; border-radius: 50%; animation: spin .6s linear infinite; display: inline-block; }
+    .spin { width: 18px; height: 18px; border: 2px solid rgba(124,58,237,.2); border-top-color: #7c3aed; border-radius: 50%; animation: spin .6s linear infinite; display: inline-block; vertical-align: middle; }
 
-    @media (max-width: 640px) {
-      .hero h1 { font-size: 2rem; }
-      .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    }
+    @media (max-width: 900px) { .masonry { column-count: 3; } }
+    @media (max-width: 640px) { .hero h1 { font-size: 1.9rem; } .masonry { column-count: 2; column-gap: 8px; } .masonry .item { margin-bottom: 8px; } }
+    @media (max-width: 400px) { .masonry { column-count: 2; } }
   </style>
 </head>
 <body>
-
   <nav class="nav">
-    <span class="logo">🔥 Blaze Wallpapers</span>
+    <span class="logo">✦ Blaze Wallpapers</span>
     <a href="https://github.com/Randyblazedev" target="_blank">RandyBlazedev</a>
   </nav>
 
   <section class="hero">
-    <h1>🔥 Blaze Wallpapers</h1>
-    <p>Unlimited HD wallpapers — download directly, no redirects</p>
-    <div class="search">
-      <span class="sicon">🔍</span>
-      <input type="text" id="s" placeholder="Search wallpapers..." oninput="doSearch()">
+    <h1>✦ Blaze Wallpapers</h1>
+    <p>Unlimited HD · direct download · no redirects</p>
+    <div class="search-wrap">
+      <span class="si">⌕</span>
+      <input type="text" id="s" placeholder="Search..." oninput="doSearch()">
     </div>
-    <div class="filters" id="chips"></div>
-    <div class="info"><span id="totalCount">0</span> wallpapers loaded · click any to preview & download</div>
+    <div class="chips" id="chips"></div>
+    <div class="info"><b id="count">0</b> wallpapers</div>
   </section>
 
   <section class="gallery">
-    <div class="grid" id="grid"></div>
-    <div class="load-wrap" id="lm"><button onclick="loadWalls()">Load More 🔥</button></div>
+    <div class="masonry" id="grid"></div>
+    <div class="load-more" id="lm"><button onclick="loadMore()">Load more ✦</button></div>
   </section>
 
   <footer>
-    <p>&copy; 2026 Blaze Wallpapers — Built by <a href="https://github.com/Randyblazedev" target="_blank">RandyBlazedev</a></p>
+    <p>&copy; 2026 — <a href="https://github.com/Randyblazedev" target="_blank">RandyBlazedev</a></p>
   </footer>
 
   <div class="full" id="full" onclick="if(event.target===this)closeF()">
-    <button class="x" onclick="closeF()">✕</button>
+    <button class="close" onclick="closeF()">✕</button>
     <img id="fi" src="" alt="">
-    <button class="d" id="fd">⬇ Download</button>
+    <button class="down" id="fd">⬇ Download</button>
   </div>
 
   <script>
-    const CATS = ['all', 'abstract', 'nature', 'city', 'space', 'tech', 'dark', 'gradient', 'minimal', 'neon', 'ocean', 'animals', 'architecture', 'food', 'music', 'travel'];
-    
-    let ALL = [];
+    const CATS = ['all', 'abstract', 'nature', 'city', 'space', 'tech', 'dark', 'minimal', 'neon', 'ocean', 'animals', 'architecture', 'textures', 'gradient'];
+    let WALLS = [];
     let page = 1;
-    let loading = false;
-    let activeCat = 'all';
-    let query = '';
-    let loadedCount = 0;
-    const PER_PAGE = 30;
+    let busy = false;
+    let curCat = 'all';
+    let q = '';
+    const PER = 30;
 
-    // Fetch from picsum API
     async function fetchPage(p) {
       try {
-        const r = await fetch(`https://picsum.photos/v2/list?page=${p}&limit=${PER_PAGE}`);
+        const r = await fetch(`https://picsum.photos/v2/list?page=${p}&limit=${PER}`);
         if (!r.ok) return [];
         return await r.json();
       } catch { return []; }
     }
 
-    // Assign a category to each image
-    function assignCat(i) {
-      return CATS[1 + (i % (CATS.length - 1))];
+    function pickCat(i) { return CATS[1 + (i % (CATS.length - 1))]; }
+
+    // Random aspect ratio for masonry variety (taller or shorter)
+    function getSize(id) {
+      // Use id to consistently get the same size
+      const seed = id % 90;
+      if (seed < 30) return { w: 400, h: 500 + (seed * 10) };
+      if (seed < 60) return { w: 400, h: 600 + (seed * 5) };
+      return { w: 400, h: 700 + (seed * 3) };
     }
 
-    async function loadWalls(append = true) {
-      if (loading) return;
-      loading = true;
+    async function loadMore(append = true) {
+      if (busy) return;
+      busy = true;
       const btn = document.querySelector('#lm button');
-      if (btn) btn.innerHTML = '<span class="spinner"></span> loading...';
+      if (btn) btn.innerHTML = '<span class="spin"></span>';
 
       const items = await fetchPage(page);
-      if (items.length === 0) {
-        if (btn) btn.textContent = 'No more 🎉';
-        loading = false;
-        return;
-      }
+      if (!items.length) { if (btn) btn.textContent = 'All loaded ✦'; busy = false; return; }
 
-      const mapped = items.map((item, i) => ({
-        id: item.id,
-        url: `https://picsum.photos/id/${item.id}/1080/1920`,
-        thumb: `https://picsum.photos/id/${item.id}/400/700`,
-        author: item.author,
-        category: assignCat(loadedCount + i),
-        title: `${assignCat(loadedCount + i)} ${item.id}`
-      }));
+      const mapped = items.map((item, i) => {
+        const sz = getSize(item.id);
+        return {
+          id: item.id,
+          url: `https://picsum.photos/id/${item.id}/${sz.w}/${sz.h}`,
+          thumb: `https://picsum.photos/id/${item.id}/${Math.round(sz.w/2)}/${Math.round(sz.h/2)}`,
+          author: item.author,
+          category: pickCat(WALLS.length + i),
+          w: sz.w, h: sz.h
+        };
+      });
 
-      ALL = append ? [...ALL, ...mapped] : mapped;
-      loadedCount = ALL.length;
+      WALLS = append ? [...WALLS, ...mapped] : mapped;
       page++;
-
-      document.getElementById('totalCount').textContent = loadedCount;
+      document.getElementById('count').textContent = WALLS.length;
       render();
-      loading = false;
-      if (btn) btn.textContent = 'Load More 🔥';
+      busy = false;
+      if (btn) btn.innerHTML = 'Load more ✦';
     }
 
-    function getFiltered() {
-      return ALL.filter(w => {
-        const c = activeCat === 'all' || w.category === activeCat;
-        const s = !query || w.category.includes(query) || String(w.id).includes(query);
-        return c && s;
+    function filtered() {
+      return WALLS.filter(w => {
+        const mCat = curCat === 'all' || w.category === curCat;
+        const mQ = !q || w.category.includes(q) || String(w.id).includes(q);
+        return mCat && mQ;
       });
     }
 
     function render() {
       const grid = document.getElementById('grid');
-      const filtered = getFiltered();
-
-      if (filtered.length === 0) {
-        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:50px 20px;color:#475569;font-size:.9rem">No wallpapers found</div>';
-        return;
-      }
-
-      grid.innerHTML = filtered.map(w => `
-        <div class="card" onclick="preview('${w.url}')">
-          <img src="${w.thumb}" alt="" loading="lazy">
-          <div class="overlay">
-            <span class="tag">${w.category}</span>
-            <button class="dl" onclick="event.stopPropagation();dl('${w.url}')">⬇ Download</button>
+      const f = filtered();
+      if (!f.length) { grid.innerHTML = '<div style="text-align:center;padding:40px;color:#3f3f46;font-size:.85rem;grid-column:1/-1">no wallpapers found</div>'; return; }
+      grid.innerHTML = f.map(w => `
+        <div class="item" onclick="preview('${w.url}')">
+          <img src="${w.thumb}" alt="" loading="lazy" style="aspect-ratio:${w.w}/${w.h}">
+          <div class="ov">
+            <span class="cat">${w.category}</span>
+            <button class="dl-btn" onclick="event.stopPropagation();dlWall('${w.url}')">⬇ Download</button>
           </div>
         </div>
       `).join('');
     }
 
-    function doSearch() {
-      query = document.getElementById('s').value.toLowerCase();
-      render();
-    }
+    function doSearch() { q = document.getElementById('s').value.toLowerCase(); render(); }
 
     function setCat(c) {
-      activeCat = c;
-      document.querySelectorAll('.chip').forEach(el => el.classList.toggle('on', el.dataset.cat === c));
+      curCat = c;
+      document.querySelectorAll('.chip').forEach(el => el.classList.toggle('on', el.dataset.c === c));
       render();
     }
 
     function renderCats() {
-      const el = document.getElementById('chips');
-      el.innerHTML = CATS.map(c => 
-        `<span class="chip ${c === 'all' ? 'on' : ''}" data-cat="${c}" onclick="setCat('${c}')">${c}</span>`
+      document.getElementById('chips').innerHTML = CATS.map(c =>
+        `<span class="chip ${c === 'all' ? 'on' : ''}" data-c="${c}" onclick="setCat('${c}')">${c}</span>`
       ).join('');
     }
 
-    // Direct download - no redirect
-    async function dl(url) {
+    async function dlWall(url) {
       try {
         const r = await fetch(url);
         const blob = await r.blob();
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = 'blaze-wallpaper-' + Date.now() + '.jpg';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        a.download = 'blaze-' + Date.now() + '.jpg';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
         setTimeout(() => URL.revokeObjectURL(a.href), 5000);
-      } catch {
-        window.open(url, '_blank');
-      }
+      } catch { window.open(url, '_blank'); }
     }
 
     let curUrl = '';
-
     function preview(url) {
-      curUrl = url;
-      document.getElementById('fi').src = url;
-      document.getElementById('fd').onclick = () => dl(url);
+      curUrl = url; document.getElementById('fi').src = url;
+      document.getElementById('fd').onclick = () => dlWall(url);
       document.getElementById('full').classList.add('on');
       document.body.style.overflow = 'hidden';
     }
+    function closeF() { document.getElementById('full').classList.remove('on'); document.body.style.overflow = ''; }
+    document.addEventListener('keydown', e => e.key === 'Escape' && closeF());
 
-    function closeF() {
-      document.getElementById('full').classList.remove('on');
-      document.body.style.overflow = '';
-    }
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeF();
-    });
-
-    // Init
-    renderCats();
-    loadWalls(false);
-
-    // Infinite scroll
+    // infinite scroll
     let ticking = false;
     window.addEventListener('scroll', () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 800;
-        if (nearBottom) loadWalls();
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 900) loadMore();
         ticking = false;
       });
     }, { passive: true });
+
+    renderCats();
+    loadMore(false);
   </script>
 </body>
 </html>
